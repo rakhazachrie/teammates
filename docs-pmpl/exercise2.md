@@ -35,7 +35,7 @@ Criteria Used: All Combinations (ACoC)
 | A1B1C1D1   | key1, id1     | Objek Student1 yang berhasil terdaftar  |
 | A1B1C1D2   | key2, id2     | Objek Student2 yang berhasil terdaftar  |
 | A1B1C2D1   | key1, id1     | Objek Student1 yang berhasil terdaftar  |
-| A1B1C2D2   | key1, id1     | EntityAlreadyExistsException |
+| A1B1C2D2   | key1, id1     | Student has already joined course (EntityAlreadyExistsException) |
 | A2B1C1D1   | 2, id1        | InvalidParametersException   |
 | A2B1C1D2   | 2, id1        | InvalidParametersException   |
 | A2B1C2D1   | 2, id1        | InvalidParametersException   |
@@ -49,4 +49,4 @@ Criteria Used: All Combinations (ACoC)
 | A2B2C1D2   | 1, 2          | InvalidParametersException   |
 | A2B2C2D2   | 1, 2          | InvalidParametersException   |
 
-Note: Pada test A1B1C1D1, A1B1C1D2, A1B1C2D1 dapat terjadi EntityDoesNotExistException
+Note: Pada test A1B1C1D1, A1B1C1D2, A1B1C2D1 dapat terjadi EntityDoesNotExistException (Wrong Key)
