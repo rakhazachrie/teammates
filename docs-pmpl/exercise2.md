@@ -32,9 +32,9 @@ Criteria Used: All Combinations (ACoC)
 
 | Test Value | Example Input | Expected Output |
 |------------|---------------|-----------------|
-| A1B1C1D1   | key1, id1     | Student1 berhasil terdaftar  |
-| A1B1C1D2   | key2, id2     | Student2 berhasil terdaftar  |
-| A1B1C2D1   | key1, id1     | Student1 berhasil terdaftar  |
+| A1B1C1D1   | key1, id1     | Objek Student1 yang berhasil terdaftar  |
+| A1B1C1D2   | key2, id2     | Objek Student2 yang berhasil terdaftar  |
+| A1B1C2D1   | key1, id1     | Objek Student1 yang berhasil terdaftar  |
 | A1B1C2D2   | key1, id1     | EntityAlreadyExistsException |
 | A2B1C1D1   | 2, id1        | InvalidParametersException   |
 | A2B1C1D2   | 2, id1        | InvalidParametersException   |
