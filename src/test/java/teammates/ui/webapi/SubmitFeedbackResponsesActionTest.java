@@ -124,4 +124,41 @@ public class SubmitFeedbackResponsesActionTest extends BaseActionTest<SubmitFeed
                 .build());
         verifyCanAccess(submissionParams);
     }
+
+    @Test
+    public void testAccessControl_studentAlreadySubmit_shouldAllowIfNotSubmit() throws Exception {
+        int questionNumber = 1;
+        FeedbackSessionAttributes session1InCourse1 = typicalBundle.feedbackSessions.get("session1InCourse1");
+        String feedbackSessionName = session1InCourse1.getFeedbackSessionName();
+        String courseId = session1InCourse1.getCourseId();
+        StudentAttributes student1InCourse1 = typicalBundle.students.get("student1InCourse1");
+        FeedbackQuestionAttributes q1InSession1InCourse1 = logic.getFeedbackQuestion(feedbackSessionName, courseId, questionNumber);
+
+        Instant newEndTime = TimeHelper.getInstantDaysOffsetFromNow(-2);
+        logic.updateFeedbackSession(FeedbackSessionAttributes.updateOptionsBuilder(feedbackSessionName, courseId)
+                .withEndTime(newEndTime)
+                .build());
+        loginAsStudent(student1InCourse1.getGoogleId());
+        String[] submissionParams = new String[] {
+                Const.ParamsNames.FEEDBACK_QUESTION_ID, q1InSession1InCourse1.getId(),
+                Const.ParamsNames.INTENT, Intent.STUDENT_SUBMISSION.toString(),
+        };
+        if (session1InCourse1.isPublished()){
+            ______TS("Feedback is already submitted");
+            verifyCannotAccess(submissionParams);
+        }
+        Map<String, Instant> newStudentSubmission = Map.of(student1InCourse1.getEmail(), TimeHelper.getInstantDaysOffsetFromNow(1));
+        logic.updateFeedbackSession(FeedbackSessionAttributes.updateOptionsBuilder(feedbackSessionName, courseId)
+                .withStudentDeadlines(newStudentSubmission)
+                .build());
+
+        if (session1InCourse1.isPublished()){
+            ______TS("Feedback is already submitted");
+            verifyCannotAccess(submissionParams);
+        }
+        else{
+            ______TS("Feedback is already submitted");
+            verifyCannotAccess(submissionParams);
+        }
+    }
 }
